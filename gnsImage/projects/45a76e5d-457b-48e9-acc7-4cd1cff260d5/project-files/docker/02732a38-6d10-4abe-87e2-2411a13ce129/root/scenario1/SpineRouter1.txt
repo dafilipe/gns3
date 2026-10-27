@@ -1,0 +1,141 @@
+### SpineRouter1  20261013-0935
+### /etc/network/interfaces
+# Management interface (written by cgr_lab.py)
+auto lo
+iface lo inet loopback
+    address 10.8.255.1/32
+
+auto eth0
+iface eth0 inet static
+    address 192.168.200.5
+    netmask 255.255.255.0
+
+# ---- your data-plane configuration goes below (ifupdown2 syntax), then: ifreload -a
+
+# Layer 3 links to Distribution switches
+auto swp7
+iface swp7 inet static
+    address 10.8.10.1/31
+
+auto swp8
+iface swp8 inet static
+    address 10.8.10.3/31
+
+auto swp9
+iface swp9 inet static
+    address 10.8.10.13/31
+
+auto swp10
+iface swp10 inet static
+    address 10.8.10.15/31
+
+# Layer 3 links to SpineRouter2
+auto swp1
+iface swp1 inet static
+    address 10.8.20.0/31
+
+auto swp2
+iface swp2 inet static
+    address 10.8.20.2/31
+
+# Layer 3 links to BorderRouter
+auto swp3
+iface swp3 inet static
+    address 10.8.30.0/31
+
+auto swp4
+iface swp4 inet static
+    address 10.8.30.2/31
+
+# Layer 3 links to DatacenterRack
+auto swp5
+iface swp5 inet static
+    address 10.8.40.0/31
+
+auto swp6
+iface swp6 inet static
+    address 10.8.40.2/31
+
+### FRR running configuration
+Building configuration...
+
+Current configuration:
+!
+frr version 10.7.1
+frr defaults datacenter
+hostname SpineRouter1
+log syslog informational
+service integrated-vtysh-config
+!
+interface lo
+ ip router isis CAMPUS
+ isis passive
+exit
+!
+interface swp1
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp2
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp3
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp4
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp5
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp6
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp7
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp8
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp9
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+interface swp10
+ ip router isis CAMPUS
+ isis circuit-type level-2-only
+ isis network point-to-point
+exit
+!
+router isis CAMPUS
+ is-type level-2-only
+ net 49.0000.0100.0825.5001.00
+ log-adjacency-changes
+exit
+!
+end

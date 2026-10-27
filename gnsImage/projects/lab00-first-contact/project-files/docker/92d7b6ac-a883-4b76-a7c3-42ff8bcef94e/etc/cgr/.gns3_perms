@@ -1,0 +1,6 @@
+644:0:0:/etc/cgr/running.json
+600:0:0:/etc/cgr/restconf-users
+644:0:0:/etc/cgr/.gns3_perms
+644:0:0:/etc/cgr/restconf.crt
+600:0:0:/etc/cgr/restconf.key
+755:0:0:/etc/cgr

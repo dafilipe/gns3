@@ -1,0 +1,24 @@
+configure terminal
+interface lo
+ ip ospf area 34
+exit
+interface swp1
+ ip ospf area 0
+ ip ospf network point-to-point
+exit
+router ospf
+ ospf router-id 3.3.3.3
+exit
+end
+write memory
+configure terminal
+router ospf
+ default-information originate always
+exit
+end
+write memory
+show ip ospf
+show ip route
+show ip route 172.16.9.1
+show ip route ospf
+show ip ospf neighbor

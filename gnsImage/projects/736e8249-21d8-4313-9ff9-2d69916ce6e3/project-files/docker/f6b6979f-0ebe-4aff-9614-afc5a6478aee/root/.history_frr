@@ -1,0 +1,36 @@
+configure terminal
+interface lo
+ ip ospf area 32
+exit
+interface swp1
+ ip ospf area 32
+ ip ospf network broadcast
+exit
+interface swp2
+ ip ospf area 43
+ ip ospf network point-to-point
+exit
+router ospf
+ ospf router-id 5.5.5.5
+exit
+end
+write memory
+configure terminal
+router ospf
+ ospf abr-type standard
+ area 32 virtual-link 1.1.1.1
+exit
+end
+write memory
+show ip ospf neighbor
+show ip route ospf
+configure terminal
+router ospf
+ ospf abr-type standard
+ area 32 virtual-link 1.1.1.1
+exit
+end
+write memory
+show ip ospf virtual-links
+show ip ospf
+show ip route ospf

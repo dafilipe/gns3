@@ -1,0 +1,25 @@
+# Management interface (written by cgr_lab.py)
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+    address 192.168.100.34
+    netmask 255.255.255.0
+
+# ---- your data-plane configuration goes below (ifupdown2 syntax), then: ifreload -a
+auto swp1
+iface swp1 inet static
+    address 10.3.24.2/30
+
+auto swp2
+iface swp2 inet static
+    address 10.3.34.2/30
+
+# LAN pc4
+auto swp3
+iface swp3 inet static
+    address 172.16.4.1/24
+
+# Loopback de routing
+    post-up ip address replace 10.255.3.4/32 dev lo

@@ -1,0 +1,32 @@
+# Management interface (written by cgr_lab.py)
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+    address 192.168.100.11
+    netmask 255.255.255.0
+
+# ---- your data-plane configuration goes below (managed by automation)
+auto lo
+iface lo inet loopback
+    address 10.255.0.1/32
+
+auto swp1
+iface swp1
+    alias to sw2
+    bridge-vids 10
+
+auto swp2
+iface swp2
+    alias PC one
+    bridge-access 10
+
+auto bridge
+iface bridge
+    bridge-vlan-aware yes
+    bridge-ports swp1 swp2
+    bridge-vids 10
+    bridge-pvid 1
+    bridge-stp on
+

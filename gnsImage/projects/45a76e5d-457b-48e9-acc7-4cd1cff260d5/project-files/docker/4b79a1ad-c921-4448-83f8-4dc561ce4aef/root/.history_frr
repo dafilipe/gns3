@@ -1,0 +1,112 @@
+show running-config
+show daemons
+configure terminal
+ip route 0.0.0.0/0 198.51.100.2
+router ospf
+ ospf router-id 10.8.255.21
+ default-information originate always
+exit
+interface lo
+ ip ospf area 0
+interface swp1
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp2
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp3
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp4
+ ip ospf area 0
+ ip ospf network point-to-point
+end
+write memory
+configure terminal
+router ospf
+ ospf router-id 10.8.255.31
+exit
+interface lo
+ ip ospf area 0
+interface swp5
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp6
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp10
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp11
+ ip ospf area 0
+ ip ospf network point-to-point
+interface swp1
+ ip ospf area 0
+ ip ospf passive
+end
+write memory
+configure terminal
+no router ospf
+end
+write memory
+show running-config
+configure terminal
+interface lo
+no ip ospf area 0
+interface swp7
+no ip ospf area 0
+show running-config
+show running-config
+show running-config
+show running-config
+configure terminal
+no ip route 0.0.0.0/0 198.51.100.2
+end
+write memory
+show running-config
+show running-config
+show running-config
+configure terminal
+router isis CAMPUS
+ net 49.0000.0100.0825.5031.00
+ is-type level-2-only
+ metric-style wide
+ log-adjacency-changes
+exit
+interface lo
+ ip router isis CAMPUS
+ isis passive
+interface swp1
+ ip router isis CAMPUS
+ isis passive
+ isis circuit-type level-2-only
+interface swp5
+ ip router isis CAMPUS
+ isis network point-to-point
+ isis circuit-type level-2-only
+interface swp6
+ ip router isis CAMPUS
+ isis network point-to-point
+ isis circuit-type level-2-only
+interface swp10
+ ip router isis CAMPUS
+ isis network point-to-point
+ isis circuit-type level-2-only
+interface swp11
+ ip router isis CAMPUS
+ isis network point-to-point
+ isis circuit-type level-2-only
+end
+write memory
+clear
+exit
+show running-config
+show isis neighbor
+show ip route
+show isis neighbor
+show ip route
+show running-config
+show isis neighbor
+show ip route
+show isis neighbor
+show ip route

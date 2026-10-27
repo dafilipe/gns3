@@ -1,0 +1,56 @@
+show running-config
+show ip ospf
+configure terminal
+interface lo
+ ip ospf area 20
+exit
+interface swp1
+ ip ospf area 32
+ ip ospf network broadcast
+ ip ospf priority 255
+exit
+interface swp2
+ ip ospf area 0
+ ip ospf network point-to-point
+exit
+router ospf
+ ospf router-id 1.1.1.1
+exit
+end
+write memory
+clear
+configure terminal
+router ospf
+ area 32 virtual-link 5.5.5.5
+exit
+end
+write memory
+show ip ospf
+configure terminal
+router ospf
+ ospf abr-type standard
+exit
+end
+write memory
+show ip ospf
+configure terminal
+router ospf
+ area 20 range 172.16.9.0/25
+exit
+end
+write memory
+show ip ospf
+show ip route ospf
+clear
+show ip ospf neighbor
+show ip ospf interface swp2
+show ip route ospf
+show interface swp2
+clear
+show interface swp2
+show running-config
+exit
+sudo ip addr del 192.168.34.1/32 dev swp2
+sudo ip addr add 192.168.34.1/24 dev swp2
+exit
+show ip ospf neighbor

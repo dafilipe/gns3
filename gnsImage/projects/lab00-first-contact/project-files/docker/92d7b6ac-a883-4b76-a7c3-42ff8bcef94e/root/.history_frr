@@ -1,0 +1,12 @@
+show running-config
+show running-config
+configure
+show running-config no-header
+show running-config no-header
+write
+write memory
+conf t
+hostname sw2
+end
+write memory
+show running-config

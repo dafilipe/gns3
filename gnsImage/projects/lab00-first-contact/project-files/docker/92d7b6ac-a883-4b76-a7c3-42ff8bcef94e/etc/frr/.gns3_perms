@@ -1,0 +1,8 @@
+640:101:105:/etc/frr/frr.conf.sav
+644:101:105:/etc/frr/daemons
+644:101:105:/etc/frr/.gns3_perms
+640:101:105:/etc/frr/frr.conf
+644:101:105:/etc/frr/vtysh.conf
+640:101:105:/etc/frr/support_bundle_commands.conf
+644:0:0:/etc/frr/frr.conf.new
+750:101:105:/etc/frr

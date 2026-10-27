@@ -1,0 +1,28 @@
+configure terminal
+interface swp1
+ ip ospf area 0
+ ip ospf network point-to-point
+exit
+interface swp2
+ ip ospf area 0
+ ip ospf network point-to-point
+exit
+router ospf
+ ospf router-id 2.2.2.2
+exit
+end
+write memory
+show ip route ospf
+ping 172.16.9.1
+show ip route ospf
+show ip ospf neighbor
+exit
+show ip route ospf
+clear
+ping 172.16.9.1
+ping 172.16.0.1
+ping 172.16.10.1
+ping 172.16.11.1
+ping 172.16.12.1
+exit
+show ip route 0.0.0.0/0

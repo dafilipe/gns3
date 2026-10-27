@@ -1,0 +1,141 @@
+configure terminal
+router isis CGR
+ net 49.0001.0102.5500.3001.00
+ is-type level-2-only
+ metric-style wide
+interface lo
+ ip router isis CGR
+ isis passive
+interface swp1
+ ip router isis CGR
+ isis network point-to-point
+interface swp2
+ ip router isis CGR
+ isis network point-to-point
+interface swp3
+ ip router isis CGR
+ isis passive
+end
+write memory
+clear
+show isis neighbor
+show isis route
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+write memory
+clear
+show running-config
+show isis interface
+show isis database
+show ip route isis
+show isis neighbor
+show isis database detail
+show isis interface swp2
+show isis neighbor
+show isis interface swp2
+show isis summary
+show isis database
+show isis route
+show isis database r1.00-00 detail
+show isis database detail
+show running-config isis
+show isis neighbor
+clear isis neighbor
+show isis database detail
+show running-config
+show isis neighbor
+show isis database detail
+show isis route
+show ip route
+clear
+conf t
+ router isis CGR
+  redistribute ipv4 
+conf t
+router isis CGR
+ net 49.0001.0102.5500.3001.00
+ is-type level-1-2
+end
+write memory
+clear
+configure terminal
+router isis CGR
+ net 49.0001.0102.5500.3001.00
+ is-type level-1-2
+end
+write memory
+clear
+show ip route 172.16.4.0/24
+show ip route 172.16.3.0/24
+show isis neighbor
+show isis database level-2
+show ip route isis
+clear
+show running-config
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+write memory
+show running-config
+show isis database level-2
+show isis
+show isis neighbor
+show isis database
+show ip route 172.16.4.0/24
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+write memory
+show ip route 172.16.4.0/24
+show ip route isis
+show running-config
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+write memory
+show running-config
+show isis neighbor
+show isis database
+show ip route isis
+clear
+show isis database detail
+show ip route 172.16.4.0/24
+show ip route 10.255.3.4/32
+show isis route
+show isis database detail
+show isis route
+show ip route 172.16.4.0/24
+clear isis *
+clear isis 
+clear isis neighbor 
+clear isis neighbor r2
+show isis neighbor
+show isis database
+show ip route 172.16.4.0/24
+show running-config
+show isis neighbor
+show isis database
+show isis route
+show ip route 172.16.4.0/24
+traceroute -n 172.16.4.1
+configure terminal
+interface swp1
+ isis metric 30
+end
+show running-config
+show ip route 172.16.4.0/24
+r1# show ip route 172.16.4.0/24
+Routing entry for 172.16.4.0/24
+  Known via "isis", distance 115, metric 30, best
+  Last update 00:00:28 ago
+  Flags: Selected 
+  Status: Installed 
+  * 10.3.13.2, via swp2, weight 1
+r1# 
+write memory
+exit

@@ -1,0 +1,11 @@
+644:0:0:/etc/default/lldpd
+644:0:0:/etc/default/hwclock
+644:0:0:/etc/default/.gns3_perms
+644:0:0:/etc/default/isc-dhcp-relay
+644:0:0:/etc/default/isc-dhcp-server
+644:0:0:/etc/default/networking
+644:0:0:/etc/default/ssh
+644:0:0:/etc/default/nss
+644:0:0:/etc/default/cron
+644:0:0:/etc/default/useradd
+755:0:0:/etc/default

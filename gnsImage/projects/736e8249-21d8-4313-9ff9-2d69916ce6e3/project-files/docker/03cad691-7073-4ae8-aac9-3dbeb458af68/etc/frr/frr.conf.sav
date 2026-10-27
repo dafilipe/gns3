@@ -1,0 +1,27 @@
+frr version 10.7.1
+frr defaults datacenter
+hostname R1
+log syslog informational
+service integrated-vtysh-config
+!
+interface lo
+ ip ospf area 20
+exit
+!
+interface swp1
+ ip ospf area 32
+ ip ospf network broadcast
+ ip ospf priority 255
+exit
+!
+interface swp2
+ ip ospf area 0
+ ip ospf network point-to-point
+exit
+!
+router ospf
+ ospf router-id 1.1.1.1
+ ospf abr-type standard
+ area 32 virtual-link 5.5.5.5
+exit
+!

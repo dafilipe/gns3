@@ -1,0 +1,27 @@
+# Management interface
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+    address 192.168.200.30
+    netmask 255.255.255.0
+
+# Lab 02 data-plane switch
+auto br0
+iface br0
+    bridge-vlan-aware yes
+    bridge-ports swp1 swp2 swp3
+    bridge-vids 1
+
+auto swp1
+iface swp1
+    bridge-access 1
+
+auto swp2
+iface swp2
+    bridge-access 1
+
+auto swp3
+iface swp3
+    bridge-access 1

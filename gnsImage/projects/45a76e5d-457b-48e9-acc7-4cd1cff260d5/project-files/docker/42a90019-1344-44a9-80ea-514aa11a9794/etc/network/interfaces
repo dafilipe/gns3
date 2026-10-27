@@ -1,0 +1,55 @@
+# Management interface (written by cgr_lab.py)
+auto lo
+iface lo inet loopback
+    address 10.8.255.2/32
+
+auto eth0
+iface eth0 inet static
+    address 192.168.200.3
+    netmask 255.255.255.0
+
+# ---- your data-plane configuration goes below (ifupdown2 syntax), then: ifreload -a
+
+# Layer 3 links to Distribution switches
+auto swp7
+iface swp7 inet static
+    address 10.8.10.9/31
+
+auto swp8
+iface swp8 inet static
+    address 10.8.10.11/31
+
+auto swp9
+iface swp9 inet static
+    address 10.8.10.5/31
+
+auto swp10
+iface swp10 inet static
+    address 10.8.10.7/31
+
+# Layer 3 links to SpineRouter1
+auto swp1
+iface swp1 inet static
+    address 10.8.20.1/31
+
+auto swp2
+iface swp2 inet static
+    address 10.8.20.3/31
+
+# Layer 3 links to BorderRouter
+auto swp3
+iface swp3 inet static
+    address 10.8.30.4/31
+
+auto swp4
+iface swp4 inet static
+    address 10.8.30.6/31
+
+# Layer 3 links to DatacenterRack
+auto swp11
+iface swp11 inet static
+    address 10.8.40.4/31
+
+auto swp12
+iface swp12 inet static
+    address 10.8.40.6/31

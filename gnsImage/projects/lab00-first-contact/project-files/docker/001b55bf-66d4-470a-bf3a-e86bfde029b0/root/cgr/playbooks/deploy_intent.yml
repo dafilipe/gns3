@@ -1,0 +1,49 @@
+# ansible-playbook playbooks/deploy_intent.yml -e intent=intent/lab00.yml [-e force=true]
+# Deploys an intent file with RESTCONF: one PUT of cgr-device:device per device.
+# (The device validates the data against the YANG model and applies it.)
+# A device refuses (409 resource-denied) a PUT that would remove configuration made by hand;
+# import it first (apply_intent.py <file> --import <device>) or add -e force=true.
+- name: Deploy intent with RESTCONF
+  hosts: all
+  gather_facts: false
+  vars:
+    intent_data: "{{ lookup('file', playbook_dir ~ '/../' ~ intent) | from_yaml }}"
+  tasks:
+    - name: Skip devices that are not in the intent file
+      ansible.builtin.meta: end_host
+      when: inventory_hostname not in intent_data.devices
+
+    - name: Read the current configuration
+      ansible.builtin.uri:
+        url: "https://{{ ansible_host }}/restconf/data/cgr-device:device?content=config"
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        force_basic_auth: true
+        validate_certs: false
+        headers: {Accept: application/yang-data+json}
+      register: current
+      delegate_to: localhost
+
+    - name: PUT the intended configuration (only if it differs)
+      ansible.builtin.uri:
+        url: "https://{{ ansible_host }}/restconf/data/cgr-device:device{{ '?force=true' if force | default(false) | bool else '' }}"
+        method: PUT
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        force_basic_auth: true
+        validate_certs: false
+        body_format: json
+        headers: {Content-Type: application/yang-data+json}
+        body:
+          "cgr-device:device": "{{ intent_data.devices[inventory_hostname] }}"
+        status_code: [201, 204, 400, 409]
+        timeout: 120
+      when: current.json['cgr-device:device'] != intent_data.devices[inventory_hostname]
+      changed_when: put.status in [201, 204]
+      register: put
+      delegate_to: localhost
+
+    - name: Report a refused or invalid configuration
+      ansible.builtin.fail:
+        msg: "{{ put.json['ietf-restconf:errors']['error'][0]['error-message'] | default(put.msg) }}"
+      when: put.status is defined and put.status in [400, 409]

@@ -1,0 +1,120 @@
+configure terminal
+router isis CGR
+ net 49.0001.0102.5500.3002.00
+ is-type level-2-only
+ metric-style wide
+interface lo
+ ip router isis CGR
+ isis passive
+interface swp1
+ ip router isis CGR
+ isis network point-to-point
+interface swp2
+ ip router isis CGR
+ isis network point-to-point
+end
+write memory
+clear
+show isis neighbor
+show isis database
+show isis route
+clear
+show ip route isis
+exit
+configure terminal
+router isis CGR
+ net 49.0002.0102.5500.3002.00
+ is-type level-1-2
+ metric-style wide
+end
+write memory
+vt
+configure terminal
+router isis CGR
+ no net 49.0001.0102.5500.3002.00
+ net 49.0002.0102.5500.3002.00
+ is-type level-1-2
+ metric-style wide
+end
+write memory
+clear
+show running-config
+show isis neighbor
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+write memory
+show running-config
+show isis neighbor
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+show running-config
+show isis summary
+show isis interface
+show isis neighbor
+clear
+show running-config isis
+clear isis neighbor
+show running-config
+show isis neighbor
+show isis database detail
+show isis route
+show ip route
+clear
+configure terminal
+router isis CGR
+ net 49.0002.0102.5500.3002.00
+ is-type level-1-2
+end
+write memory
+clear
+show isis neighbor
+show ip route isis
+show ip route 172.16.4.0/24
+clear
+show ip route 172.16.3.0/24
+clear
+show isis database level-2
+show ip route isis
+clear
+show running-config
+configure terminal
+router isis CGR
+ is-type level-1-2
+end
+write memory
+r1# show running-config
+Building configuration...
+Current configuration:
+!
+frr version 10.7.1
+frr defaults datacenter
+hostname r1
+log syslog informational
+service integrated-vtysh-config
+!
+interface lo
+ ip router isis CGR
+ isis passive
+exit
+show running-config
+show isis neighbor
+show isis database
+show ip route 172.16.4.0/24
+show isis database r2.00-00 detail
+show isis database detail
+show isis neighbor
+show isis database
+show isis database detail
+show running-config
+show logging
+show isis interface
+show isis neighbor
+show isis database
+show running-config
+show isis neighbor
+show isis database
+show isis route
