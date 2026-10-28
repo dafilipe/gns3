@@ -1,7 +1,0 @@
-auto lo
-iface lo inet loopback
-auto eth1
-iface eth1 inet static
-    address 198.51.100.2
-    netmask 255.255.255.252
-    up ip route add 10.8.0.0/16 via 198.51.100.1

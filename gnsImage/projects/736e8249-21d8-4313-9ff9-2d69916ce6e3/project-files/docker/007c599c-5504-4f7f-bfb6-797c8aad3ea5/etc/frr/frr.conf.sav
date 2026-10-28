@@ -1,6 +1,0 @@
-frr defaults datacenter
-hostname R4
-log syslog informational
-service integrated-vtysh-config
-!
-end

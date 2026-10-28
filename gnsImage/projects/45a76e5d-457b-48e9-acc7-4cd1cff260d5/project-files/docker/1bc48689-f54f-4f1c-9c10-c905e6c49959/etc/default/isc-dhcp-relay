@@ -1,3 +1,0 @@
-SERVERS="10.8.50.1"
-INTERFACES=""
-OPTIONS="-i bridge.2 -i bridge.3 -iu swp7 -iu swp8 -iu swp9 -iu swp10"
